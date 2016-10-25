@@ -8,18 +8,15 @@ result = open("512M+7_result", 'wb')
 
 finished = False
 
-block_size = 16
+block_size = 32
 
 while not finished:
-	hash = SHA512.new() #產生一個hash物件
-	chunk = message.read(1024*block_size) #每次讀160個B
-	''' padding '''
-	if len(chunk) == 0 or len(chunk) % block_size != 0:
-		padding_length = block_size - (len(chunk) % block_size)
-		chunk += padding_length * chr(padding_length)
+	chunk = message.read(1024*block_size) #每次讀個B
+	if len(chunk) == 0:
 		finished = True
+	hash = SHA512.new() #產生一個hash物件
 	hash.update(chunk)
 	result.write(hash.digest()) #Continue hashing of a message by consuming the next chunk of data.	
-	# print hash.hexdigest() #print出16進位的加密資料
+	print len(hash.digest()) #print出Hash後的資料長度：應該為64B
 message.close()
 result.close()

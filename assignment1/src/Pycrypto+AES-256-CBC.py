@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Crypto.Cipher import AES
-
+import base64
 # 產生256bits的key
 key = 'This is a KEY123This is a key123'
 iv = 'This is an IV123'
