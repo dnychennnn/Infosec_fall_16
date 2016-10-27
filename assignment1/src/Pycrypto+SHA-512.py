@@ -8,10 +8,10 @@ result = open("512M+7_result", 'wb')
 
 finished = False
 
-block_size = 32
+block_size = 1024
 
 while not finished:
-	chunk = message.read(1024*block_size) #每次讀個B
+	chunk = message.read(1024*block_size) #每次讀個1024*32B
 	if len(chunk) == 0:
 		finished = True
 	hash = SHA512.new() #產生一個hash物件
